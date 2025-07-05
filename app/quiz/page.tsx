@@ -2965,5 +2965,61 @@ export default function QuizPage() {
                 <span className="text-xl font-semibold text-white">MOONGRADE</span>
               </div>
 
-              {/* Progress indicator */}\
-              <div className
+              {/* Progress indicator */}
+              <div className="text-sm text-gray-300 font-medium">
+                {currentStep}/{totalSteps}
+              </div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="mt-4">
+              <Progress value={progressPercentage} className="h-2 bg-slate-600" />
+            </div>
+          </div>
+        </header>
+
+        {/* Main content */}
+        <main className="container mx-auto px-4 py-16 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Main heading */}
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
+              We need a few more details to create your
+              <br />
+              <span className="text-yellow-400">personalized guidance plan</span>
+            </h1>
+
+            {/* Description */}
+            <div className="max-w-3xl mx-auto mb-16">
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+                This will help us provide you with the most accurate and
+                <br />
+                relevant insights for your unique situation.
+              </p>
+            </div>
+
+            {/* Continue button */}
+            <div className="flex justify-center">
+              <Button
+                onClick={handleContinue}
+                size="lg"
+                className="px-12 py-4 bg-yellow-400 hover:bg-yellow-500 text-black font-semibold text-lg rounded-full transition-all duration-200 hover:scale-105"
+              >
+                Continue
+              </Button>
+            </div>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  // Return a default fallback for any unhandled steps
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">Quiz Complete!</h1>
+        <p className="text-gray-600">Thank you for completing the quiz.</p>
+      </div>
+    </div>
+  )
+}
