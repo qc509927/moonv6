@@ -918,12 +918,87 @@ export default function QuizClient() {
     )
   }
 
+  // Step 2: Astrology Level Selection
+  if (currentStep === 2) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <header className="sticky top-0 bg-white/80 backdrop-blur-sm border-b border-gray-100 z-10">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <Button variant="ghost" size="sm" onClick={handleBack} className="p-2 hover:bg-gray-100 rounded-full">
+                <ArrowLeft className="h-5 w-5 text-gray-600" />
+              </Button>
+
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"></div>
+                <span className="text-xl font-semibold text-gray-800">MOONGRADE</span>
+              </div>
+
+              <div className="text-sm text-gray-600 font-medium">
+                {currentStep}/{totalSteps}
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <Progress value={progressPercentage} className="h-2" />
+            </div>
+          </div>
+        </header>
+
+        <main className="container mx-auto px-4 py-12">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-12">
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                What's your level of astrology knowledge?
+              </h1>
+              <p className="text-lg text-gray-600">
+                This helps us personalize your experience
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {levels.map((level) => (
+                <Card
+                  key={level.id}
+                  className={`p-6 cursor-pointer transition-all duration-200 hover:shadow-md hover:scale-[1.02] border-2 ${
+                    selectedLevel === level.id
+                      ? "border-purple-400 bg-purple-50"
+                      : "border-gray-200 hover:border-gray-300"
+                  }`}
+                  onClick={() => handleLevelSelect(level.id)}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="text-2xl">{level.icon}</div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-gray-900">{level.label}</h3>
+                      <p className="text-sm text-gray-600">{level.description}</p>
+                    </div>
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 transition-colors ${
+                        selectedLevel === level.id ? "border-purple-400 bg-purple-400" : "border-gray-300"
+                      }`}
+                    >
+                      {selectedLevel === level.id && (
+                        <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                      )}
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
   // Return a default fallback for any unhandled steps
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">Quiz Page</h1>
         <p className="text-gray-600">Step {currentStep} of {totalSteps}</p>
+        <Button onClick={handleBack} className="mt-4">Voltar</Button>
       </div>
     </div>
   )
